@@ -1,5 +1,5 @@
 import { MainLayout } from '@/layouts/MainLayout';
-import { CreditsView, ErrorView, HomeView, MovieView, NowPlayingView, ReviewsView, } from '@/views';
+import { CreditsView, ErrorView, HomeView, MovieView, Movies, ReviewsView, } from '@/views';
 import { Route, Routes } from 'react-router-dom';
 
 export const App = () => {
@@ -7,7 +7,7 @@ export const App = () => {
     <Routes>
       <Route path="/" element={<HomeView />} />
       <Route element={<MainLayout />}>
-        <Route path="/now-playing" element={<NowPlayingView />} />
+        <Route path="/Movies" element={<Movies />} />
         <Route path="/movie/:id" element={<MovieView />}>
           <Route path="credits" element={<CreditsView />} />
           <Route path="reviews" element={<ReviewsView />} />
