@@ -1,5 +1,5 @@
 import { ButtonGroup,ImageGrid, Pagination } from '@/components';
-import { MOVIE_POPULAR_ENDPOINT, NOW_PLAYING_ENDPOINT } from '@/core/constants';
+import { MOVIE_POPULAR_ENDPOINT, MOVIE_TOP_RATED_ENDPOINT, MOVIE_UPCOMING, NOW_PLAYING_ENDPOINT } from '@/core/constants';
 import type { MediaResponse } from '@/core/types';
 import { useTmdb } from '@/hooks';
 import { useState } from 'react';
@@ -9,7 +9,13 @@ export const Movies = () => {
   const [page, setPage] = useState<number>(1);
   const [searchParams, setSearchParams] = useSearchParams();
   const interval = searchParams.get('interval') || 'now_playing';
-  const endpoint = interval === 'now_playing' ? NOW_PLAYING_ENDPOINT : MOVIE_POPULAR_ENDPOINT;//add more button
+  const endpointmap ={
+    now_playing:NOW_PLAYING_ENDPOINT,
+    popular:MOVIE_POPULAR_ENDPOINT,
+    top_rate:MOVIE_TOP_RATED_ENDPOINT,
+    upcoming:MOVIE_UPCOMING,
+  }
+  const endpoint = endpointmap[interval]
   const { data } = useTmdb<MediaResponse>(endpoint, { page }, [endpoint, page]);
 
   const gridData = (data?.results ?? []).map((result) => ({
@@ -33,6 +39,8 @@ export const Movies = () => {
           options={[
             { label: 'Now Playing', value: 'now_playing' },
             { label: 'Popular', value: 'popular' },
+            { label: 'Top Rate', value: 'top_rate'},
+            { label: 'Upcoming', value: 'upcoming'},
           ]}
         />
         <ImageGrid results={gridData} getHref={(id) => `/movie/${id}`} />
