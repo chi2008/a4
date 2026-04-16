@@ -1,19 +1,19 @@
 import { ButtonGroup,ImageGrid, Pagination } from '@/components';
-import { MOVIE_POPULAR_ENDPOINT, MOVIE_TOP_RATED_ENDPOINT, MOVIE_UPCOMING, NOW_PLAYING_ENDPOINT } from '@/core/constants';
+import { TV_AIRING_TODAY, TV_ON_THE_AIR, TV_POPUALR, TV_TOP_RATED } from '@/core/constants';
 import type { MediaResponse } from '@/core/types';
 import { useTmdb } from '@/hooks';
 import { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
-export const Movies = () => {
+export const TelevisionView = () => {
   const [page, setPage] = useState<number>(1);
   const [searchParams, setSearchParams] = useSearchParams();
-  const interval = searchParams.get('interval') || 'now_playing';
+  const interval = searchParams.get('interval') || 'airing_today';
   const Chooseinterval ={
-    now_playing:NOW_PLAYING_ENDPOINT,
-    popular:MOVIE_POPULAR_ENDPOINT,
-    top_rated:MOVIE_TOP_RATED_ENDPOINT,
-    upcoming:MOVIE_UPCOMING,
+    airing_today:TV_AIRING_TODAY,
+    on_the_day:TV_ON_THE_AIR,
+    tv_popualr:TV_POPUALR,
+    tv_top_rated:TV_TOP_RATED,
   }
   const Choose = Chooseinterval[interval]
   const { data } = useTmdb<MediaResponse>(Choose, { page }, [Choose, page]);
@@ -30,20 +30,20 @@ export const Movies = () => {
 
   return (
       <section className="max-w-[1200px] mx-auto p-5 space-y-5">
-        <h1 className="text-3xl font-bold mb-4">Movie</h1>
+        <h1 className="text-3xl font-bold mb-4">TV</h1>
         <ButtonGroup
           value={interval}
           onClick={(value: string) => {
             setSearchParams({ interval: value });
           }}
           options={[
-            { label: 'Now Playing', value: 'now_playing' },
-            { label: 'Popular', value: 'popular' },
-            { label: 'Top Rated', value: 'top_rated'},
-            { label: 'Upcoming', value: 'upcoming'},
+            { label: 'Airing today', value: 'airing_today' },
+            { label: 'On the day', value: 'on_the_day' },
+            { label: 'Popular', value: 'tv_popualr'},
+            { label: 'Top Rate', value: 'tv_top_rated'},
           ]}
         />
-        <ImageGrid results={gridData} getHref={(id) => `/movie/${id}`} />
+        <ImageGrid results={gridData} getHref={(id) => `/tv/${id}`} />
           <Pagination page={page} maxPages={data.total_pages} onClick={setPage} />
     </section>
   );

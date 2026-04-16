@@ -10,3 +10,8 @@ export const MOVIE_TOP_RATED_ENDPOINT = 'https://api.themoviedb.org/3/movie/top_
 export const MOVIE_UPCOMING = 'https://api.themoviedb.org/3/movie/upcoming';
 
 export const SEARCH_MOVIE_ENDPOINT = 'https://api.themoviedb.org/3/search/movie';
+
+export const TV_AIRING_TODAY ='https://api.themoviedb.org/3/tv/airing_today'
+export const TV_ON_THE_AIR ='https://api.themoviedb.org/3/tv/on_the_air'
+export const TV_POPUALR = 'https://api.themoviedb.org/3/tv/popular'
+export const TV_TOP_RATED ='https://api.themoviedb.org/3/tv/top_rated'
