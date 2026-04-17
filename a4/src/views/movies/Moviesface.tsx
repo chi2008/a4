@@ -3,9 +3,10 @@ import { MOVIE_POPULAR_ENDPOINT, MOVIE_TOP_RATED_ENDPOINT, MOVIE_UPCOMING, NOW_P
 import type { MediaResponse } from '@/core/types';
 import { useTmdb } from '@/hooks';
 import { useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 export const Movies = () => {
+  const navigate = useNavigate();
   const [page, setPage] = useState<number>(1);
   const [searchParams, setSearchParams] = useSearchParams();
   const interval = searchParams.get('interval') || 'now_playing';
@@ -43,8 +44,8 @@ export const Movies = () => {
             { label: 'Upcoming', value: 'upcoming'},
           ]}
         />
-        <ImageGrid results={gridData} getHref={(id) => `/movie/${id}`} />
-          <Pagination page={page} maxPages={data.total_pages} onClick={setPage} />
+      <ImageGrid results={gridData} onClick={(id) => navigate(`/movie/${id}/credits`)} />
+      <Pagination page={page} maxPages={data.total_pages} onClick={setPage} />
     </section>
   );
 };
