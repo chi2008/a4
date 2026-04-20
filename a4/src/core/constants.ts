@@ -18,3 +18,5 @@ export const TV_POPUALR = 'https://api.themoviedb.org/3/tv/popular'
 export const TV_TOP_RATED ='https://api.themoviedb.org/3/tv/top_rated'
 export const TV_DETAIL_ENDPOINT = (id: string | number) => `https://api.themoviedb.org/3/tv/${id}`;
 export const TV_SEASONNUMBER_ENDPOINT = (series_id: string | number, season_number: string | number) => `https://api.themoviedb.org/3/tv/${series_id}/season/${season_number}`;
+
+export const MOVIE_TRENDING = 'https://api.themoviedb.org/3/trending/movie'

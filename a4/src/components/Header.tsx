@@ -7,6 +7,7 @@ export const Header = () => {
         <h1 className="text-2xl font-bold text-white-900">TMDB Explorer</h1>
         <Link to="/Movies">Movies</Link>
         <Link to='/Television'>TV</Link>
+        <Link to='/Trending'>Trending</Link>
       </nav>
     </header>
   );

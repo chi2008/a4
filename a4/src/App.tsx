@@ -7,6 +7,7 @@ import { TelevisionCredits } from './views/tv/TelevisionCreadits';
 import { TelevisionReviews } from './views/tv/TelevisionReviews';
 import { SeasonView } from './views/tv/SeasonView';
 import { EpisodeView } from './views/tv/SeasonNumber';
+import { TrendingView } from './views/trending/TrendingView';
 
 export const App = () => {
   return (
@@ -15,13 +16,13 @@ export const App = () => {
 
       <Route element={<MainLayout />}>
         <Route path="/Movies" element={<Movies />} />
+        <Route path='/Trending' element={<TrendingView/>}/>
+        <Route path='/Television' element={<Television/>}/>
 
         <Route path="/movie/:id" element={<MovieView />}>
           <Route path="credits" element={<CreditsView />} />
           <Route path="reviews" element={<ReviewsView />} />
         </Route>
-
-        <Route path='/Television' element={<Television/>}/>
 
         <Route path="/tv/:id" element={<TelevisionView />}>
           <Route path="seasons" element={<SeasonView />} />
@@ -29,7 +30,6 @@ export const App = () => {
           <Route path="tvcredits" element={<TelevisionCredits />} />
           <Route path="tvreviews" element={< TelevisionReviews/>}/>
         </Route>
-
       </Route>
 
       <Route path="*" element={<ErrorView />} />
