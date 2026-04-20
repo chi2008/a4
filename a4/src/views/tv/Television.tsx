@@ -3,9 +3,10 @@ import { TV_AIRING_TODAY, TV_ON_THE_AIR, TV_POPUALR, TV_TOP_RATED } from '@/core
 import type { MediaResponse } from '@/core/types';
 import { useTmdb } from '@/hooks';
 import { useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
-export const TelevisionView = () => {
+export const Television = () => {
+    const navigate = useNavigate();
   const [page, setPage] = useState<number>(1);
   const [searchParams, setSearchParams] = useSearchParams();
   const interval = searchParams.get('interval') || 'airing_today';
@@ -43,8 +44,8 @@ export const TelevisionView = () => {
             { label: 'Top Rate', value: 'tv_top_rated'},
           ]}
         />
-        <ImageGrid results={gridData} getHref={(id) => `/tv/${id}`} />
-          <Pagination page={page} maxPages={data.total_pages} onClick={setPage} />
+        <ImageGrid results={gridData} onClick={(id) => navigate(`/tv/${id}/seasons`)} />
+      <Pagination page={page} maxPages={data.total_pages} onClick={setPage} />
     </section>
   );
 };

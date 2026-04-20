@@ -23,6 +23,46 @@ export type MovieRepsonse = {
   };
 };
 
+export type TvResponse = {
+  id: number;
+  name: string;
+  overview: string;
+  poster_path: string;
+  backdrop_path: string;
+  first_air_date: string;
+  vote_average: string;
+  videos?: {
+    results: Array<{
+      key: string;
+      name: string;
+      site: string;
+      type: string;
+    }>;
+  };
+};
+
+export type SeasonResponse = {
+  seasons: Array<{
+    id: number;
+    name: string;
+    overview: string;
+    poster_path: string;
+    air_date: string;
+    season_number: number|string;
+    episode_count: number|string;
+  }>;
+};
+export type EpisodeResponse = {
+  episodes: Array<{
+    id: number;
+    name: string;
+    overview: string;
+    still_path: string;
+    air_date: string;
+    episode_number: number;
+  }>;
+};
+
 export type MediaResponse = {
   results: Array<{
     id: number;

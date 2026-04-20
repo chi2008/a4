@@ -1,20 +1,37 @@
 import { MainLayout } from '@/layouts/MainLayout';
 import { CreditsView, ErrorView, HomeView, MovieView, Movies, ReviewsView} from '@/views';
 import { Route, Routes } from 'react-router-dom';
-import { TelevisionView } from './views/tv/Television';
+import { Television } from './views/tv/Television';
+import { TelevisionView } from './views/tv/TelevisionView';
+import { TelevisionCredits } from './views/tv/TelevisionCreadits';
+import { TelevisionReviews } from './views/tv/TelevisionReviews';
+import { SeasonView } from './views/tv/SeasonView';
+import { EpisodeView } from './views/tv/SeasonNumber';
 
 export const App = () => {
   return (
     <Routes>
       <Route path="/" element={<HomeView />} />
+
       <Route element={<MainLayout />}>
         <Route path="/Movies" element={<Movies />} />
-        <Route path='/Television' element={<TelevisionView/>}/>
+
         <Route path="/movie/:id" element={<MovieView />}>
           <Route path="credits" element={<CreditsView />} />
           <Route path="reviews" element={<ReviewsView />} />
         </Route>
+
+        <Route path='/Television' element={<Television/>}/>
+
+        <Route path="/tv/:id" element={<TelevisionView />}>
+          <Route path="seasons" element={<SeasonView />} />
+          <Route path="season/:seasonNumber" element={<EpisodeView />} />
+          <Route path="tvcredits" element={<TelevisionCredits />} />
+          <Route path="tvreviews" element={< TelevisionReviews/>}/>
+        </Route>
+
       </Route>
+
       <Route path="*" element={<ErrorView />} />
     </Routes>
   );
