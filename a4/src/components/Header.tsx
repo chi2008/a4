@@ -8,6 +8,7 @@ export const Header = () => {
         <Link to="/Movies">Movies</Link>
         <Link to='/Television'>TV</Link>
         <Link to='/Trending'>Trending</Link>
+        <Link to='/Gen'>Gen</Link>
       </nav>
     </header>
   );
