@@ -20,3 +20,4 @@ export const TV_DETAIL_ENDPOINT = (id: string | number) => `https://api.themovie
 export const TV_SEASONNUMBER_ENDPOINT = (series_id: string | number, season_number: string | number) => `https://api.themoviedb.org/3/tv/${series_id}/season/${season_number}`;
 
 export const MOVIE_TRENDING = 'https://api.themoviedb.org/3/trending/movie'
+export const TV_TRENDING ='https://api.themoviedb.org/3/trending/tv/'
