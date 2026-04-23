@@ -16,7 +16,7 @@ export const App = () => {
 
       <Route element={<MainLayout />}>
         <Route path="/Movies" element={<Movies />} />
-        <Route path='/Trending' element={<TrendingView/>}/>
+        <Route path='/Trending/movies' element={<TrendingView/>}/>
         <Route path='/Television' element={<Television/>}/>
 
         <Route path="/movie/:id" element={<MovieView />}>

@@ -1,5 +1,5 @@
 import { ButtonGroup, ImageGrid, Pagination } from '@/components';
-import { MOVIE_TRENDING, TV_TRENDING} from '@/core/constants';
+import { MOVIE_TRENDING} from '@/core/constants';
 import type { MediaResponse } from '@/core/types';
 import { useTmdb } from '@/hooks';
 import { useState } from 'react';
@@ -9,14 +9,10 @@ export const TrendingView = () => {
   const navigate = useNavigate();
   const [page, setPage] = useState<number>(1);
   const [searchParams, setSearchParams] = useSearchParams();
-  
-  const Trending={
-    movie:MOVIE_TRENDING,
-    tv:TV_TRENDING,
-  }
-  const TrendingChoose=Trending[Trending]
+  const Trending = searchParams.get('Trending') || 'movie';
+
   const interval = searchParams.get('interval') || 'day';
-  const { data } = useTmdb<MediaResponse>(`${TrendingChoose}/${interval}`, { page, time_window: interval }, [page, interval]);
+  const { data } = useTmdb<MediaResponse>(`${MOVIE_TRENDING}/${interval}`, { page, time_window: interval }, [page, interval]);
 
   const gridData = (data?.results ?? []).map((result) => ({
     id: result.id,
@@ -31,7 +27,6 @@ export const TrendingView = () => {
   return (
     <section className="max-w-[1200px] mx-auto p-5 space-y-5">
       <div className="flex items-center justify-between mb-4">
-        <h1 className="text-3xl font-bold">Trending</h1>
         <ButtonGroup
           value={Trending}
           options={[
@@ -40,6 +35,9 @@ export const TrendingView = () => {
           ]}
           onClick={(value) => setSearchParams({ Trending: value })}
         />
+      </div>
+      <div className="flex items-center justify-between mb-4">
+        <h1 className="text-3xl font-bold">Trending</h1>
         <ButtonGroup
           value={interval}
           options={[
@@ -49,7 +47,7 @@ export const TrendingView = () => {
           onClick={(value) => setSearchParams({ interval: value })}
         />
       </div>
-      <ImageGrid results={gridData} onClick={(id) => navigate(`/${TrendingChoose}/${id}/credits`)} />
+      <ImageGrid results={gridData} onClick={(id) => navigate(`/movie/${id}/credits`)} />
       <Pagination page={page} maxPages={data.total_pages} onClick={setPage} />
     </section>
   );
