@@ -72,6 +72,10 @@ export type MediaResponse = {
   total_pages: number;
 };
 
+export type PerosonResponse ={
+  
+}
+
 export type CreditsResponse = {
   cast: Array<{
     id: number;

@@ -5,12 +5,10 @@ import { useTmdb } from '@/hooks';
 import { useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
-export const TrendingView = () => {
+export const TrendingMovieView = () => {
   const navigate = useNavigate();
   const [page, setPage] = useState<number>(1);
   const [searchParams, setSearchParams] = useSearchParams();
-  const Trending = searchParams.get('Trending') || 'movie';
-
   const interval = searchParams.get('interval') || 'day';
   const { data } = useTmdb<MediaResponse>(`${MOVIE_TRENDING}/${interval}`, { page, time_window: interval }, [page, interval]);
 
@@ -27,17 +25,7 @@ export const TrendingView = () => {
   return (
     <section className="max-w-[1200px] mx-auto p-5 space-y-5">
       <div className="flex items-center justify-between mb-4">
-        <ButtonGroup
-          value={Trending}
-          options={[
-            { label: 'Movie', value: 'movie' },
-            { label: 'Tv', value: 'tv' },
-          ]}
-          onClick={(value) => setSearchParams({ Trending: value })}
-        />
-      </div>
-      <div className="flex items-center justify-between mb-4">
-        <h1 className="text-3xl font-bold">Trending</h1>
+      <h1 className="text-3xl font-bold">Trending</h1>
         <ButtonGroup
           value={interval}
           options={[

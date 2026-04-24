@@ -21,3 +21,5 @@ export const TV_SEASONNUMBER_ENDPOINT = (series_id: string | number, season_numb
 
 export const MOVIE_TRENDING = 'https://api.themoviedb.org/3/trending/movie'
 export const TV_TRENDING ='https://api.themoviedb.org/3/trending/tv/'
+
+export const PERSON ='https://api.themoviedb.org/3/person/'
