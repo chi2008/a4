@@ -4,6 +4,8 @@ export type GridData = {
   primaryText: string;
   secondaryText?: string;
 };
+export type MediaType = 'tv' | 'movie';
+
 
 export type MovieRepsonse = {
   id: number;
@@ -66,15 +68,39 @@ export type EpisodeResponse = {
 export type MediaResponse = {
   results: Array<{
     id: number;
-    original_title: string;
+    original_title?: string;
+    name?: string;
     poster_path: string;
   }>;
   total_pages: number;
 };
 
-export type PerosonResponse ={
-  
+export type PersonResponse ={
+  id: number;
+  name: string;
+  profile_path: string;
+  birthday: string;
+  biography: string;
 }
+
+export type CareerResponse = {
+  cast: Array<{
+    id: number;
+    title: string;
+    poster_path: string;
+    release_date: string;
+    character: string;
+  }>;
+};
+
+export type ImageResponse = {
+  profiles: Array<{
+    id: number;
+    name: string;
+    file_path: string;
+    character: string;
+  }>;
+};
 
 export type CreditsResponse = {
   cast: Array<{

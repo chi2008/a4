@@ -13,7 +13,7 @@ export const CreditsView = () => {
     imagePath: result.profile_path,
     primaryText: result.name,
     secondaryText: result.character,
-    href: `/Person/${id}` 
+    href: `/person/${result.id}` 
   }));
 
   if (!data) {
