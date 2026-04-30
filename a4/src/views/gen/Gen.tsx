@@ -9,14 +9,14 @@ export const GenresView = () => {
   const [page, setPage] = useState<number>(1);
   const [searchParams, setSearchParams] = useSearchParams();
   const [MediaType, setMediaType] = useState<ChangeType>(searchParams.get('Type') as ChangeType || 'movie');
-  const interval = searchParams.get('interval') || 'advencture';
-  const { data } = useTmdb<MediaResponse>(`https://api.themoviedb.org/3/discover/${MediaType}/${interval}`, {}, [page, interval, MediaType]);
+  const interval = searchParams.get('interval') || '28';
+  const { data } = useTmdb<MediaResponse>(`https://api.themoviedb.org/3/discover/${MediaType}`, {with_genres: interval}, [page, interval, MediaType]);
 
   const gridData = (data?.results ?? []).map((result) => ({
     id: result.id,
     imagePath: result.poster_path,
     primaryText: result.original_title || result.name,
-  }));
+  })); 
 
   const Change = (type: ChangeType) => {
     setMediaType(type);
@@ -45,16 +45,16 @@ export const GenresView = () => {
         <ButtonGroup
           value={interval}
           options={[
-            { label: 'Advencture', value: 'advencture' },
-            { label: 'Action', value: 'action' },
-            { label: 'Animation', value: 'animation' },
-            { label: 'Crime', value: 'crime' },
-            { label: 'Family', value: 'family' },
-            { label: 'Fantasy', value: 'fantasy' },
-            { label: 'History', value: 'history' },
-            { label: 'Horror', value: 'horror' },
-            { label: 'Mystery', value: 'mystery' },
-            { label: 'Sci-Fi', value: 'sci-Fi' },
+            { label: 'Action', value: '28' }, 
+            { label: 'Advencture', value: '12' },
+            { label: 'Animation', value: '16' },
+            { label: 'Crime', value: '80' },
+            { label: 'Family', value: '10751' },
+            { label: 'Fantasy', value: '14' },
+            { label: 'History', value: '36' },
+            { label: 'Horror', value: '27' },
+            { label: 'Mystery', value: '9648' },
+            { label: 'Sci-Fi', value: '878' },
           ]}
           onClick={(value) => setSearchParams({ interval: value })}
         />
