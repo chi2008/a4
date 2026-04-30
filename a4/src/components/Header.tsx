@@ -8,7 +8,7 @@ export const Header = () => {
         <Link to="/movies">Movies</Link>
         <Link to='/television'>TV</Link>
         <Link to='/trending/'>Trending</Link>
-        <Link to='/genres'>Genres</Link>
+        <Link to='/genres/'>Genres</Link>
       </nav>
     </header>
   );

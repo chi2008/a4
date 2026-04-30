@@ -4,7 +4,7 @@ export type GridData = {
   primaryText: string;
   secondaryText?: string;
 };
-export type MediaType = 'tv' | 'movie';
+export type ChangeType = 'tv' | 'movie';
 
 
 export type MovieRepsonse = {
