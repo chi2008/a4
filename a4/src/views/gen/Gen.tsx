@@ -10,7 +10,7 @@ export const GenresView = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [MediaType, setMediaType] = useState<ChangeType>(searchParams.get('Type') as ChangeType || 'movie');
   const interval = searchParams.get('interval') || '28';
-  const { data } = useTmdb<MediaResponse>(`https://api.themoviedb.org/3/discover/${MediaType}`, {with_genres: interval}, [page, interval, MediaType]);
+  const { data } = useTmdb<MediaResponse>(`https://api.themoviedb.org/3/discover/${MediaType}`, {page,with_genres: interval}, [page, interval, MediaType]);
 
   const gridData = (data?.results ?? []).map((result) => ({
     id: result.id,
@@ -18,20 +18,23 @@ export const GenresView = () => {
     primaryText: result.original_title || result.name,
   })); 
 
+  const movie = ()=> void{
+    
+  }
+
   const Change = (type: ChangeType) => {
     setMediaType(type);
     setPage(1); 
     setSearchParams({ interval, type });
   };
-
+  
   if (!data) {
     return <p className="text-center text-gray-400">Loading...</p>;
   }
-
   return (
     <section className="max-w-[1200px] mx-auto p-5 space-y-5">
       <div className="flex items-center justify-between mb-4">
-      <h1 className="text-3xl font-bold">Trending</h1>
+      <h1 className="text-3xl font-bold">Genres</h1>
         <ButtonGroup
           value={MediaType}
           options={[
