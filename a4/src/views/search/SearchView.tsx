@@ -1,26 +1,25 @@
 import { ImageGrid, Pagination } from '@/components';
-import { IMAGE_BASE_URL } from '@/core/constants';
-import type { ChangeType, ImageCell, ShResponse } from '@/core/types';
+import type { ChangeType, ShResponse } from '@/core/types';
 import { useDebounce, useTmdb } from '@/hooks';
 import { useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
-
+const getImageUrl = (path: string | undefined) => `https://image.tmdb.org/t/p/w500${path}`;
 export const SearchView = () => {
-  const getImageUrl = (fileName: string) => `${IMAGE_BASE_URL}${fileName}`;
+
   const navigate = useNavigate();
   const [query, setQuery] = useState('');
   const [page, setPage] = useState<number>(1);
   const [searchParams] = useSearchParams();
   const debouncedQuery = useDebounce(query, 500);
   const [MediaType, setMediaType] = useState<ChangeType>(searchParams.get('type') as ChangeType || 'movie');
-  const { data } = useTmdb<ShResponse>(`search/${MediaType}`, { query: debouncedQuery, page: page },[debouncedQuery, page, MediaType]);
+  const { data } = useTmdb<ShResponse>(`https://api.themoviedb.org/3/search/${MediaType}`, { query: debouncedQuery, page},[debouncedQuery, page, MediaType]);
 
 
 
-  const gridData: ImageCell[] = data?.results?.map((result: any) => ({
+  const gridData = (data?.results ?? []).map((result) => ({
     id: result.id,
-    imagePath: getImageUrl(result.poster_path || result.profile_path), 
+    imagePath:getImageUrl(result.poster_path || result.profile_path), 
     primaryText: result.original_title || result.name, 
     secondaryText: result.release_date || result.known_for_department,
     media: MediaType,

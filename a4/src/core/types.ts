@@ -10,6 +10,7 @@ export type SearchResultItem ={
   id: number;
   title?: string;
   poster_path?: string;
+  original_title?: string;
   release_date?: string;
   first_air_date?: string;
   name?: string;
@@ -18,8 +19,17 @@ export type SearchResultItem ={
 }
 
 export type ShResponse = {
-  page: number;
-  results: SearchResultItem[];
+  results:Array<{
+    id: number;
+    title?: string;
+    poster_path?: string;
+    original_title?: string;
+    release_date?: string;
+    first_air_date?: string;
+    name?: string;
+    profile_path?: string;
+    known_for_department?: string;
+  }>;
   total_pages: number;
   total_results: number;
 }
