@@ -18,14 +18,35 @@ export const GenresView = () => {
     primaryText: result.original_title || result.name,
   })); 
 
-  const movie = ()=> void{
-    
-  }
-
+  const movie = [
+    { label: 'Action', value: '28' }, 
+    { label: 'Advencture', value: '12' },
+    { label: 'Animation', value: '16' },
+    { label: 'Crime', value: '80' },
+    { label: 'Family', value: '10751' },
+    { label: 'Fantasy', value: '14' },
+    { label: 'History', value: '36' },
+    { label: 'Horror', value: '27' },
+    { label: 'Mystery', value: '9648' },
+    { label: 'Sci-Fi', value: '878' },
+  ]
+  const tv = [
+    { label: 'Action', value: '10759' }, 
+    { label: 'Animation', value: '16' },
+    { label: 'Comedy', value: '35' },
+    { label: 'Crime', value: '80' },
+    { label: 'Documentary', value: '99' },
+    { label: 'Drama', value: '18' },
+    { label: 'Family', value: '10751' },
+    { label: 'Kids', value: '10752' },
+    { label: 'Mystery', value: '9648' },
+    { label: 'Sci-Fi', value: '10765' },
+  ];
   const Change = (type: ChangeType) => {
     setMediaType(type);
     setPage(1); 
-    setSearchParams({ interval, type });
+    const defaultGenreId = type === 'tv' ? tv[0].value : movie[0].value;
+    setSearchParams({ interval: defaultGenreId, type: type });
   };
   
   if (!data) {
@@ -47,18 +68,7 @@ export const GenresView = () => {
         <div> 
         <ButtonGroup
           value={interval}
-          options={[
-            { label: 'Action', value: '28' }, 
-            { label: 'Advencture', value: '12' },
-            { label: 'Animation', value: '16' },
-            { label: 'Crime', value: '80' },
-            { label: 'Family', value: '10751' },
-            { label: 'Fantasy', value: '14' },
-            { label: 'History', value: '36' },
-            { label: 'Horror', value: '27' },
-            { label: 'Mystery', value: '9648' },
-            { label: 'Sci-Fi', value: '878' },
-          ]}
+          options={(MediaType === 'movie' ? movie : tv)}
           onClick={(value) => setSearchParams({ interval: value })}
         />
       </div>

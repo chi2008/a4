@@ -20,7 +20,7 @@ export function useTmdb<T>(url: string, params: Record<string, any>, deps: any[]
         setData(response.data);
       } catch (err) {
         console.error(err);
-      }
+      } 
     };
 
     fetchData();

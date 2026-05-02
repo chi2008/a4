@@ -16,7 +16,7 @@ export const ImageGrid = ({ results, onClick }: ImageGridProps) => {
   const navigate = useNavigate();
   return (
     <div className="grid grid-cols-[repeat(auto-fill,_minmax(180px,1fr))] gap-5">
-      {results.map((result) => (
+      {results?.map((result) => (
         <div
           key={result.id}
           className="block bg-gray-800 rounded-lg overflow-hidden cursor-pointer hover:scale-[1.02] transition"

@@ -12,6 +12,7 @@ import { PersonView } from './views/person/PersonView';
 import { CareerView } from './views/person/CareerView';
 import { ImageView } from './views/person/ImageView';
 import { GenresView } from './views/gen/Gen';
+import { SearchView } from './views/search/SearchView';
 
 export const App = () => {
   return (
@@ -21,7 +22,7 @@ export const App = () => {
       <Route element={<MainLayout />}>
         <Route path="/movies" element={<Movies />} />
         <Route path='/trending' element={<TrendingView/>}/>
-
+        <Route path='/search' element={<SearchView/>}/>
         <Route path='/person/:id' element={<PersonView/>}>
           <Route path="career" element={<CareerView />} />
           <Route path="images" element={<ImageView />} />

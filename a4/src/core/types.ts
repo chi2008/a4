@@ -4,7 +4,33 @@ export type GridData = {
   primaryText: string;
   secondaryText?: string;
 };
-export type ChangeType = 'tv' | 'movie';
+export type ChangeType = 'tv' | 'movie'| 'person';
+
+export type SearchResultItem ={
+  id: number;
+  title?: string;
+  poster_path?: string;
+  release_date?: string;
+  first_air_date?: string;
+  name?: string;
+  profile_path?: string;
+  known_for_department?: string;
+}
+
+export type ShResponse = {
+  page: number;
+  results: SearchResultItem[];
+  total_pages: number;
+  total_results: number;
+}
+
+export type ImageCell = {
+  id: number;
+  imagePath: string;
+  primaryText: string;
+  secondaryText?: string;
+  media?: ChangeType;
+};
 
 
 export type MovieRepsonse = {
