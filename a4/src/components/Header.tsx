@@ -7,10 +7,12 @@ export const Header = () => {
   const navigate = useNavigate();
   const [searchParams,setSearchParams] = useSearchParams();
   const MediaType = searchParams.get('type') || "movie";
+  
   const searchChange = (Type: string) => {
     setSearchParams({ query: query, type: Type });
     navigate(`/search?query=${query}&type=${Type}`);
   };
+
   const handleSearch = (value: string) => {
     setQuery(value);
     setSearchParams({ query: value, type: MediaType });

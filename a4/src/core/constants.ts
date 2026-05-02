@@ -25,3 +25,5 @@ export const TV_TRENDING ='https://api.themoviedb.org/3/trending/tv/'
 export const PERSON ='https://api.themoviedb.org/3/person'
 export const PERSONCAREER = (id: string | number) => `https://api.themoviedb.org/3/person/${id}/movie_credits`
 export const PERSONIMAGE = (id: string | number) => `https://api.themoviedb.org/3/person/${id}/images`
+
+export const SEARCH_ENDPOINT = 'https://api.themoviedb.org/3/search';

@@ -1,19 +1,28 @@
 import { ImageGrid, Pagination } from '@/components';
+import { SEARCH_ENDPOINT } from '@/core/constants';
 import type { ChangeType, ShResponse } from '@/core/types';
 import { useDebounce, useTmdb } from '@/hooks';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
 const getImageUrl = (path: string | undefined) => `https://image.tmdb.org/t/p/w500${path}`;
 export const SearchView = () => {
-
   const navigate = useNavigate();
-  const [query, setQuery] = useState('');
-  const [page, setPage] = useState<number>(1);
   const [searchParams] = useSearchParams();
-  const debouncedQuery = useDebounce(query, 500);
+
+  const usequery = searchParams.get('query') || '';
+  const usetype = searchParams.get('type') as ChangeType || 'movie';
+
   const [MediaType, setMediaType] = useState<ChangeType>(searchParams.get('type') as ChangeType || 'movie');
-  const { data } = useTmdb<ShResponse>(`https://api.themoviedb.org/3/search/${MediaType}`, { query: debouncedQuery, page},[debouncedQuery, page, MediaType]);
+  const [query, setQuery] = useState(searchParams.get('query') || '');
+  const [page, setPage] = useState<number>(1);
+  const debouncedQuery = useDebounce(query, 300);
+  useEffect(() => {
+  setQuery(usequery);
+  setMediaType(usetype);
+  setPage(1); 
+}, [searchParams]);
+  const { data } = useTmdb<ShResponse>(`${SEARCH_ENDPOINT}/${MediaType}`, { query: debouncedQuery || '', page }, [debouncedQuery, page, MediaType]);
 
 
 
@@ -25,14 +34,14 @@ export const SearchView = () => {
     media: MediaType,
 })) || [];
 
-  if (debouncedQuery && !data) {
+  if (!data) {
     return <p className="text-center text-gray-400">Loading...</p>;
   }
 
   return (
     <section className="mx-auto w-full max-w-7xl space-y-5 p-5">
       <h1 className="mb-4 text-3xl font-bold">Search for:{debouncedQuery}</h1>
-      <ImageGrid results={gridData} onClick={(id) => {setPage(1); navigate(`/${MediaType}/${id}/credits`);}}/>
+      <ImageGrid results={gridData} onClick={(id) => {setPage(1); navigate(`/${MediaType}/${id}`);}}/>
 
       {data && data.results && data.results.length > 0 ? (
   <Pagination page={page} maxPages={data.total_pages} onClick={setPage} />
