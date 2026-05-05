@@ -13,7 +13,7 @@ export const TelevisionCredits = () => {
     imagePath: result.profile_path,
     primaryText: result.name,
     secondaryText: result.character,
-    href: `/Person/${id}` 
+    href: `/Person/${result.id}` 
 
   }));
 

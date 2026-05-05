@@ -5,7 +5,6 @@ import { useDebounce, useTmdb } from '@/hooks';
 import { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
-const getImageUrl = (path: string | undefined) => `https://image.tmdb.org/t/p/w500${path}`;
 export const SearchView = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
@@ -17,11 +16,14 @@ export const SearchView = () => {
   const [query, setQuery] = useState(searchParams.get('query') || '');
   const [page, setPage] = useState<number>(1);
   const debouncedQuery = useDebounce(query, 300);
+  const getImageUrl = (path: string | undefined) => `https://image.tmdb.org/t/p/w500${path}`;
+
   useEffect(() => {
-  setQuery(usequery);
-  setMediaType(usetype);
-  setPage(1); 
-}, [searchParams]);
+    setQuery(usequery);
+    setMediaType(usetype);
+    setPage(1); 
+  }, [searchParams]);
+
   const { data } = useTmdb<ShResponse>(`${SEARCH_ENDPOINT}/${MediaType}`, { query: debouncedQuery || '', page }, [debouncedQuery, page, MediaType]);
 
 

@@ -13,7 +13,8 @@ import { CareerView } from './views/person/CareerView';
 import { ImageView } from './views/person/ImageView';
 import { GenresView } from './views/gen/Gen';
 import { SearchView } from './views/search/SearchView';
-import { TrailerView } from './views/tre/Trailers';
+import { TrailersView } from './views/tra/Trailers';
+import { TrailersMovieView } from './views/tra/TrailersMovie';
 
 export const App = () => {
   return (
@@ -34,7 +35,7 @@ export const App = () => {
         <Route path="/movie/:id" element={<MovieView />}>
           <Route path="credits" element={<CreditsView />} />
           <Route path="reviews" element={<ReviewsView />} />
-          <Route path='trailers' element={<TrailerView/>}/>
+          <Route path='trailers' element={<TrailersMovieView/>}/>
         </Route>
 
         <Route path="/tv/:id" element={<TelevisionView />}>
@@ -42,7 +43,7 @@ export const App = () => {
           <Route path="season/:seasonNumber" element={<EpisodeView />} />
           <Route path="tvcredits" element={<TelevisionCredits />} />
           <Route path="tvreviews" element={< TelevisionReviews/>}/>
-          <Route path='trailers' element={<TrailerView/>}/>
+          <Route path='trailers' element={<TrailersView/>}/>
         </Route>
         <Route path="/genres" element={<GenresView />}/>
       </Route>

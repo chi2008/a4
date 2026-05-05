@@ -16,12 +16,14 @@ export const PersonView = () => {
   }
 
   return (
-    <Modal onClose={() => navigate(-1)}>
       <div className="p-6 space-y-6">
         <div className="flex gap-8">
           <img className="w-[220px] h-[330px] object-cover rounded-xl" src={`${IMAGE_BASE_URL}${data.profile_path}`} alt={data.name} />
           <div className="flex-1 space-y-4">
             <h1 className="text-3xl font-bold">{data.name}</h1>
+            <button
+              className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition"
+              onClick={() => navigate(-1)}>Back</button>            
             <p className="text-gray-400 flex items-center gap-2">
               <FaCalendarAlt />
               {data.birthday}
@@ -37,6 +39,5 @@ export const PersonView = () => {
         </div>
         <Outlet />
       </div>
-    </Modal>
   );
 };
