@@ -1,7 +1,8 @@
 export type GridData = {
   id: number;
   imagePath: string | null;
-  primaryText: string;
+  primaryText?: string;
+  name?:string;
   secondaryText?: string;
 };
 export type ChangeType = 'tv' | 'movie'| 'person';
